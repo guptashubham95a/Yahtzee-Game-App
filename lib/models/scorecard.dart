@@ -1,5 +1,5 @@
 import 'package:collection/collection.dart';
-
+import 'package:flutter/foundation.dart';
 
 enum ScoreCategory {
   ones("Ones"),
@@ -15,16 +15,15 @@ enum ScoreCategory {
   largeStraight("Large Straight"),
   yahtzee("Yahtzee"),
   chance("Chance");
-  
+
   const ScoreCategory(this.name);
-  
+
   final String name;
 }
 
-
-class ScoreCard {
-  final Map<ScoreCategory, int?> _scores = { 
-    for (var category in ScoreCategory.values) category : null 
+class ScoreCard with ChangeNotifier {
+  final Map<ScoreCategory, int?> _scores = {
+    for (var category in ScoreCategory.values) category: null
   };
 
   int? operator [](ScoreCategory category) => _scores[category];
@@ -37,6 +36,8 @@ class ScoreCard {
     _scores.forEach((key, value) {
       _scores[key] = null;
     });
+    notifyListeners();
+    // Notify listeners after clearing
   }
 
   void registerScore(ScoreCategory category, List<int> dice) {
@@ -46,7 +47,7 @@ class ScoreCard {
       throw Exception('Category $category already has a score');
     }
 
-    switch(category) {
+    switch (category) {
       case ScoreCategory.ones:
         _scores[category] = dice.where((d) => d == 1).sum;
         break;
@@ -78,7 +79,7 @@ class ScoreCard {
           _scores[category] = 0;
         }
         break;
-        
+
       case ScoreCategory.fourOfAKind:
         if (dice.any((d) => dice.where((d2) => d2 == d).length >= 4)) {
           _scores[category] = dice.sum;
@@ -86,10 +87,10 @@ class ScoreCard {
           _scores[category] = 0;
         }
         break;
-        
+
       case ScoreCategory.fullHouse:
-        if (uniqueVals.length == 2 
-          && uniqueVals.any((d) => dice.where((d2) => d2 == d).length == 3)) {
+        if (uniqueVals.length == 2 &&
+            uniqueVals.any((d) => dice.where((d2) => d2 == d).length == 3)) {
           _scores[category] = 25;
         } else {
           _scores[category] = 0;
@@ -97,9 +98,9 @@ class ScoreCard {
         break;
 
       case ScoreCategory.smallStraight:
-        if (uniqueVals.containsAll([1, 2, 3, 4]) 
-            || uniqueVals.containsAll([2, 3, 4, 5]) 
-            || uniqueVals.containsAll([3, 4, 5, 6])) {
+        if (uniqueVals.containsAll([1, 2, 3, 4]) ||
+            uniqueVals.containsAll([2, 3, 4, 5]) ||
+            uniqueVals.containsAll([3, 4, 5, 6])) {
           _scores[category] = 30;
         } else {
           _scores[category] = 0;
@@ -107,8 +108,8 @@ class ScoreCard {
         break;
 
       case ScoreCategory.largeStraight:
-        if (uniqueVals.containsAll([1, 2, 3, 4, 5]) 
-            || uniqueVals.containsAll([2, 3, 4, 5, 6])) {
+        if (uniqueVals.containsAll([1, 2, 3, 4, 5]) ||
+            uniqueVals.containsAll([2, 3, 4, 5, 6])) {
           _scores[category] = 40;
         } else {
           _scores[category] = 0;
@@ -127,5 +128,6 @@ class ScoreCard {
         _scores[category] = dice.sum;
         break;
     }
+    notifyListeners(); // Notify listeners after registering score
   }
 }
