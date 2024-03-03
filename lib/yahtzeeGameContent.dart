@@ -117,7 +117,9 @@ class ScoreDisplay extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 16.1),
       child: Text(
-        'Current Score: ${scoreCard.total}',
+        scoreCard.completed
+            ? 'Total Score: ${scoreCard.total}'
+            : 'Current Score: ${scoreCard.total}',
         style: const TextStyle(fontSize: 21),
       ),
     );

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mp2/main.dart';
 import 'package:provider/provider.dart';
 import '../models/dice.dart';
 import '../models/scorecard.dart';
@@ -8,6 +7,7 @@ class GameCompletedDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scoreCard = Provider.of<ScoreCard>(context);
+    final dice = Provider.of<Dice>(context, listen: false);
     return AlertDialog(
       title: const Text(
         'Game Completed!!',
@@ -26,14 +26,8 @@ class GameCompletedDialog extends StatelessWidget {
             children: [
               TextButton(
                 onPressed: () {
-                  Provider.of<Dice>(context, listen: false).clear();
-                  Provider.of<ScoreCard>(context, listen: false).clear();
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => Yahtzee(),
-                    ),
-                  );
+                  dice.clear();
+                  scoreCard.clear();
                 },
                 child: const Text(
                   'Regame',
