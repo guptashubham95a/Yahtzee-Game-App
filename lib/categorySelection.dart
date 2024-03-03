@@ -18,15 +18,14 @@ class CategorySelection extends StatelessWidget {
                 .where((cat) => cat.index < ScoreCategory.values.length ~/ 2))
               GestureDetector(
                 onTap: () {
-                  if (dice.values.length != 5) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Roll once before picking category.'),
-                      ),
-                    );
+                  if (scoreCard[category] != null) {
+                    showMessage(context, 'Category already picked.');
+                  } else if (dice.values.length != 5) {
+                    showMessage(context, 'Roll once before picking category.');
                   } else {
-                    if (!scoreCard.completed)
+                    if (!scoreCard.completed) {
                       scoreCard.registerScore(category, dice.values);
+                    }
                     dice.clear();
                   }
                 },
@@ -63,12 +62,8 @@ class CategorySelection extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   if (dice.values.length != 5) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text(
-                            'Roll the dice before selecting any category.'),
-                      ),
-                    );
+                    showMessage(context,
+                        'Roll the dice before selecting any category.');
                   } else {
                     scoreCard.registerScore(category, dice.values);
                     dice.clear();
@@ -102,4 +97,13 @@ class CategorySelection extends StatelessWidget {
       ],
     );
   }
+}
+
+void showMessage(BuildContext context, String message) {
+  ScaffoldMessenger.of(context).removeCurrentSnackBar();
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(message),
+    ),
+  );
 }

@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mp2/views/yahtzeeGame.dart';
-import 'dart:math';
-import 'package:provider/provider.dart';
-
-import 'models/scorecard.dart';
-import 'models/dice.dart';
 
 void main() {
   runApp(const Yahtzee());

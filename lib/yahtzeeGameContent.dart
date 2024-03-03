@@ -6,8 +6,6 @@ import './gameCompletedDialog.dart';
 import './categorySelection.dart';
 
 class YahtzeeGameContent extends StatelessWidget {
-  const YahtzeeGameContent({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -51,6 +49,10 @@ class YahtzeeGameContent extends StatelessWidget {
                               : ((scoreCard.completed)
                                   ? 'Smash Again!'
                                   : 'Out of rolls'),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       CategorySelection(),
@@ -78,7 +80,10 @@ class DiceDisplay extends StatelessWidget {
         children: List.generate(5, (index) {
           return GestureDetector(
             onTap: () {
-              dice.toggleHold(index);
+              if (dice.values.length != 5) {
+                showMessage(context, 'Roll the dice before selecting.');
+              }
+              if (dice.values.length == 5) dice.toggleHold(index);
             },
             child: Container(
               width: 50,
@@ -87,7 +92,7 @@ class DiceDisplay extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 border: Border.all(
-                  color: dice.isHeld(index) ? Colors.red : Colors.blueGrey,
+                  color: dice.isHeld(index) ? Colors.green : Colors.blueGrey,
                   width: 3,
                 ),
               ),
