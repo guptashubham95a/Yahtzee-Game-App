@@ -25,7 +25,8 @@ This Flutter app implements the classic dice game Yahtzee. User can roll five di
 
 ## Output
 
-![Output]([https://github.com/cs442app/mp2-shubhgupta101/output.png](https://github.com/cs442app/mp2-shubhgupta101/blob/main/output.png))
+![Image Description](https://github.com/cs442app/mp2-shubhgupta101/blob/main/output.png)
+
 
 ## Widgets Used
 
