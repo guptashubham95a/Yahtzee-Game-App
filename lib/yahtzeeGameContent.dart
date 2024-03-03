@@ -29,13 +29,13 @@ class YahtzeeGameContent extends StatelessWidget {
                             scoreCard.clear();
                           }
 
-                          if (dice.rollCount <= 3) {
+                          if (dice.rollCount < 3) {
                             dice.roll();
                           }
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
-                              dice.rollCount <= 3 ? Colors.blue : Colors.grey,
+                              dice.rollCount < 3 ? Colors.blue : Colors.grey,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
                                 20), // Adjust the button's border radius
@@ -46,8 +46,8 @@ class YahtzeeGameContent extends StatelessWidget {
                               vertical: 16, horizontal: 24),
                         ),
                         child: Text(
-                          dice.rollCount <= 3
-                              ? 'Roll (${dice.rollCount})'
+                          dice.rollCount < 3
+                              ? 'Roll (${dice.rollCount + 1})'
                               : ((scoreCard.completed)
                                   ? 'Smash Again!'
                                   : 'Out of rolls'),
@@ -81,8 +81,8 @@ class DiceDisplay extends StatelessWidget {
               dice.toggleHold(index);
             },
             child: Container(
-              width: 80,
-              height: 80,
+              width: 50,
+              height: 65,
               margin: const EdgeInsets.all(11),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),

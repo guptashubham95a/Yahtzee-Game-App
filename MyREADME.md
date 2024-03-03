@@ -1,82 +1,63 @@
-# Flutter Profile Information App
+# Flutter Yahtzee Game App
 
-# CS 442 MP1: Profile Page Shubham Gupta A20551502
+# CS 442 MP2: Yahtzee Game App Shubham Gupta A20551502
 
 ## Specifications
 
 ### Sections
 
-The profile page consists of several visually distinct sections, each representing different aspects of the user's profile. These sections are:
+This Flutter app implements the classic dice game Yahtzee. User can roll five dice up to three times on their turn to try and achieve different combinations of dice values. After each roll, they can choose which dice to keep and which to reroll. Once they've completed their rolls, they must select a category for their score based on the combination they achieved. The game continues until all categories are filled on the scorecard. The player with the highest total score at the end of the game wins.
 
-1. **Profile Header**: Displays the user's name, position, and company.
-2. **Personal Information**: Provides contact details such as phone number, email, and address.
-3. **Education**: Showcases the user's educational background.
-4. **Projects**: Highlights the user's notable projects.
-5. **About**: Includes a summary of the user's background and aspirations.
-6. **Work Experience**: Lists the user's professional work experiences.
-7. **Interests**: Exhibits the user's hobbies and interests.
-8. **Photos**: Displays a collection of user photos.
+## Features
 
-### Requirements
+- Roll dice up to three times per turn.
+- Select which dice to keep and reroll.
+- Choose from different scoring categories.
+- View ongoing score and total score.
+- Game over dialog box displaying the total score.
+- Option to reset the game and start over.
+- Visual indication of selected dice and available scoring categories.
 
-- The page layout is designed to be scrollable, allowing users to view all sections.
-- Each section is visually distinguished using appropriate techniques such as padding, background colors, or nested widgets.
-- At least three images are incorporated throughout the profile page.
-- Utilization of at least one nested row/column widget, with each nested widget containing a minimum of two children.
+## Dependencies
+
+- Provider: State management library for managing game state and data.
+- Dart Random: Library for generating random numbers for dice rolls.
 
 ## Widgets Used
 
-### ProfileHeader Widget
+### DiceDisplay Widget
 
-- Displays the user's name, position, and company.
-- Utilizes a Row widget to arrange the elements horizontally.
+The DiceDisplay widget is responsible for displaying the dice values during a Yahtzee game. It visually represents the dice using a container with rounded corners and a border to simulate the appearance of dice. Each die's value is displayed in the center of the container.
 
-### PersonalInfoSection Widget
+### CategorySelection Widget
 
-- Presents contact details including phone number, email, and address.
-- Utilizes a Column widget for vertical alignment of information.
+The CategorySelection widget allows the player to select a category for their score after completing their rolls. It presents a list of available categories and allows the user to tap on a category to choose it. This widget helps in managing the scoring process and ensures that players can easily select their desired category.
 
-### EducationSection Widget
+### ScoreDisplay Widget
 
-- Showcases the user's educational background using ListTile widgets within a ListView.
+The ScoreDisplay widget is responsible for displaying the player's current scorecard during the Yahtzee game. It presents a list of scoring categories along with the corresponding scores achieved by the player. This widget helps players keep track of their progress and make informed decisions about their next moves.
 
-### ProjectSection Widget
+### GameCompletedDialog Widget
 
-- Highlights the user's projects using a GridView.
+The GameCompletedDialog widget is displayed when the Yahtzee game is completed, indicating that all categories on the scorecard have been filled. It presents a dialog box with the player's total score and provides an option to start a new game. This widget serves as a visual indicator of game completion and allows players to choose their next actions.
 
-### AboutSection Widget
+### YahtzeeGameContent Widget
 
-- Provides a summary of the user's background and aspirations using a Text widget.
-
-### WorkExperienceSection Widget
-
-- Lists the user's work experiences using ListTile widgets within a ListView.
-
-### InterestsSection Widget
-
-- Exhibits the user's hobbies and interests using ListTile widgets within a ListView.
-
-### PhotosSection Widget
-
-- Displays a collection of user photos using a Row widget with Wrap widget for flexibility in arrangement.
+The YahtzeeGameContent widget is the main component of the Yahtzee game screen. It combines various sub-widgets such as DiceDisplay, CategorySelection, ScoreDisplay, and others to create the complete game interface. This widget manages the game logic, including rolling dice, selecting categories, updating scores, and displaying game over dialogs. It serves as the central hub for all game-related interactions and elements.
 
 ## Code Structure and Flow
 
-### Screens Folder
+### Widgets
 
-- **profile_screen.dart**: Defines the ProfileScreen widget, which serves as the main screen of the application. This widget arranges various profile sections vertically using a SingleChildScrollView and Column widget.
-
-### Widgets Folder
-
-- **widgets folder**: Contains separate widget files for each profile section, promoting code modularity and reusability.
+- **widgets**: Contains separate widget files for each section, promoting code modularity and reusability.
 
 ### Models Folder
 
-- **models folder**: Contains the User class defining the structure of user data.
+- **models folder**: Contains the essential class defining the structure of game data.
 
 ### Main File
 
-- **main.dart**: Initializes the Flutter application and sets up the ProfileApp widget with the user data.
+- **main.dart**: Initializes the Flutter application and sets up the Yahtzee widget with the user data.
 
 ## Conclusion
 
