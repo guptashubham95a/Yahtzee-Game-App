@@ -1,7 +1,5 @@
 # Flutter Yahtzee Game App
 
-# CS 442 MP2: Yahtzee Game App Shubham Gupta A20551502
-
 ## Specifications
 
 ### Sections
